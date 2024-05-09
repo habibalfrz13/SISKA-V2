@@ -25,7 +25,7 @@ class MyclassController extends Controller
     public function userIndex()
     {
         $userId = Auth::id();
-        $myclass = Myclass::where('id_user', $userId)->get();
+        $myclass = Myclass::where('user_id', $userId)->get();
        
         return view('dashboard.myclass.userIndex', [
             'myclass' => $myclass,
@@ -44,21 +44,21 @@ class MyclassController extends Controller
 {
     // Validasi data yang dikirim dari form
         $request->validate([
-            'id_user' => 'required',
-            'id_kelas' => 'required',
+            'user_id' => 'required',
+            'kelas_id' => 'required',
             // Tambahkan validasi sesuai kebutuhan
         ]);
 
     // Simpan data kelas baru ke database dengan status "Belum dibayar"
         Myclass::create([
-            'id_user' => $request->id_user,
-            'id_kelas' => $request->id_kelas,
+            'user_id' => $request->user_id,
+            'kelas_id' => $request->kelas_id,
             'status' => 'Belum dibayar',
         ]);
 
         Peserta::create([
-            'id_user' => $request->id_user,
-            'id_kelas' => $request->id_kelas,
+            'user_id' => $request->user_id,
+            'kelas_id' => $request->kelas_id,
             'nama_peserta' => $request->nama_peserta,
             'judul' => $request->judul,
         ]);
@@ -71,10 +71,10 @@ class MyclassController extends Controller
     public function show($id)
     {
         // Menggabungkan tabel Myclass dan Peserta menggunakan kueri join
-        $myclass = Myclass::join('pesertas', 'myclasses.id_user', '=', 'pesertas.id_user')
-                        ->where('myclasses.id_kelas', $id)
+        $myclass = Myclass::join('pesertas', 'myclasses.user_id', '=', 'pesertas.user_id')
+                        ->where('myclasses.kelas_id', $id)
                         ->select('myclasses.id', 'myclasses.status', 'myclasses.foto', 'pesertas.nama_peserta') // Mengambil kolom yang dibutuhkan
-                        ->groupBy('myclasses.id', 'myclasses.status', 'myclasses.foto', 'pesertas.nama_peserta') // Mengelompokkan berdasarkan id_kelas, status, foto, dan nama_peserta
+                        ->groupBy('myclasses.id', 'myclasses.status', 'myclasses.foto', 'pesertas.nama_peserta') // Mengelompokkan berdasarkan kelas_id, status, foto, dan nama_peserta
                         ->get();
 
         // Mengirim data ke view

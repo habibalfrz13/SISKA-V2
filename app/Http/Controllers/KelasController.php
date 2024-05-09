@@ -28,7 +28,7 @@ class KelasController extends Controller
                         ->whereNotExists(function ($query) use ($userId) {
                             $query->select(DB::raw(1))
                                 ->from('myclasses')
-                                ->whereRaw('myclasses.id_kelas = kelas.id')
+                                ->whereRaw('myclasses.kelas_id = kelas.id')
                                 ->where('id_user', $userId);
                         })
                         ->get();

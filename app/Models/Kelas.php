@@ -20,7 +20,7 @@ class Kelas extends Model
         'deskripsi',
     ];
 
-    public function relasis()
+    public function myClasses()
     {
         return $this->hasMany(Myclass::class);
     }

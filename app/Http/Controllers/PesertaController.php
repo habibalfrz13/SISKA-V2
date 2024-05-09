@@ -25,8 +25,8 @@ class PesertaController extends Controller
     {
         // Validasi data yang dikirim dari form
         $request->validate([
-            'id_user' => 'required',
-            'id_kelas' => 'required',
+            'user_id' => 'required',
+            'kelas_id' => 'required',
             'nama_peserta' => 'required',
             'judul' => 'required',
             // Tambahkan validasi sesuai kebutuhan
@@ -34,8 +34,8 @@ class PesertaController extends Controller
 
         // Simpan data peserta baru ke database
         Peserta::create([
-            'id_user' => $request->id_user,
-            'id_kelas' => $request->id_kelas,
+            'user_id' => $request->user_id,
+            'kelas_id' => $request->kelas_id,
             'nama_peserta' => $request->nama_peserta,
             'judul' => $request->judul,
         ]);
@@ -66,8 +66,8 @@ class PesertaController extends Controller
 
         // Validasi data yang dikirim dari form
         $request->validate([
-            'id_user' => 'required',
-            'id_kelas' => 'required',
+            'user_id' => 'required',
+            'kelas_id' => 'required',
             'nama_peserta' => 'required',
             'judul' => 'required',
             // Tambahkan validasi sesuai kebutuhan
@@ -75,8 +75,8 @@ class PesertaController extends Controller
 
         // Update data peserta
         $peserta->update([
-            'id_user' => $request->id_user,
-            'id_kelas' => $request->id_kelas,
+            'user_id' => $request->user_id,
+            'kelas_id' => $request->kelas_id,
             'nama_peserta' => $request->nama_peserta,
             'judul' => $request->judul,
         ]);

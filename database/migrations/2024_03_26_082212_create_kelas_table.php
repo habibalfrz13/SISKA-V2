@@ -17,7 +17,8 @@ return new class extends Migration
             $table->integer('kuota'); // Atribut kuota
             $table->dateTime('pelaksanaan'); // Atribut pelaksanaan
             $table->string('status')->default('tidak aktif'); // Atribut status
-            $table->string('kategori');
+            $table->unsignedBigInteger('id_kategori');
+            $table->unsignedBigInteger('id_vendor');
             $table->string('deskripsi');
             $table->string('harga');
             $table->text('foto');

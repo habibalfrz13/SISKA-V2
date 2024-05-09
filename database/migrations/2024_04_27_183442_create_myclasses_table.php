@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('status');
             $table->timestamps();
         });
+
+        // Tambahkan definisi kunci asing ke tabel 'myclasses'
+        Schema::table('myclasses', function (Blueprint $table) {
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
+        });
     }
 
     /**

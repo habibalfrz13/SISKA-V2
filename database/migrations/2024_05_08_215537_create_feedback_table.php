@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,20 +10,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pesertas', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('kelas_id')->constrained()->onDelete('cascade');
-            $table->string('nama_peserta');
-            $table->string('judul');
+            $table->unsignedTinyInteger('rating');
+            $table->text('komentar')->nullable();
+            $table->date('tanggal_ulasan');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('pesertas');
+        Schema::dropIfExists('feedback');
     }
 };
